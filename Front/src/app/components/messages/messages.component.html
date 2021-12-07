@@ -1,0 +1,107 @@
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-white w3-animate-right w3-card " style="z-index:3;width:320px;" id="mySidebar">
+    
+    <a href="javascript:void(0)" onclick="w3_close()" title="Close Sidemenu" 
+    class="w3-bar-item w3-button  w3-hide-large w3-large">بستن <i class="fa fa-remove"></i></a>
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-theme-d2 w3-button w3-hover-black w3-right-align" onclick="document.getElementById('messageModal').style.display='block'"><i class="w3-padding fa fa-pencil "></i>ارسال پیام</a>
+    <a id="myBtn" (click)="myFunc('Demo1')" href="javascript:void(0)" class="w3-bar-item w3-button w3-right-align"><i class="fa fa-inbox w3-margin-right"></i>&nbsp;&nbsp;پیام های خوانده نشده (2)<i class="fa fa-caret-down w3-margin-right"></i></a>
+    <div id="Demo1" class="w3-hide w3-animate-right">
+      <a href="javascript:void(0)" (click)="openMail('Borge')" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey" onclick="openMail('Borge');w3_close();" id="firstTab">
+        <div class="w3-container w3-right-align">
+          <img class="w3-round w3-margin-left " src="assets/img/3.jpg" style="width:15%;"><span class="w3-opacity w3-large">لولا</span>
+          <h6>موضوع</h6>
+          <p>عکسا رو ببین</p>
+        </div>
+      </a>
+       <a href="javascript:void(0)" (click)="openMail('Jane')" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey" onclick="openMail('Jane');w3_close();">
+        <div class="w3-container w3-right-align">
+          <img class="w3-round w3-margin-left" src="assets/w3images/avatar5.png" style="width:15%;"><span class="w3-opacity w3-large">اشلی</span>
+          <p>چلنج</p>
+        </div>
+      </a>
+      <!-- <a href="javascript:void(0)" (click)="openMail('John')" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey" onclick="openMail('John');w3_close();">
+        <div class="w3-container w3-right-align">
+          <img class="w3-round w3-margin-left" src="assets/w3images/avatar2.png" style="width:15%;"><span class="w3-opacity w3-large">John Doe</span>
+          <p>Welcome!</p>
+        </div>
+      </a> -->
+    </div>
+    <a href="#" class="w3-bar-item w3-button w3-right-align"><i class="fa fa-paper-plane w3-margin-right"></i>&nbsp;&nbsp; پیام های ارسال شده</a>
+    <a href="#" class="w3-bar-item w3-button w3-right-align"><i class="fa fa-hourglass-end w3-margin-right"></i>&nbsp;&nbsp; پیام های دریافتی</a>
+    
+  </nav>
+  
+  <!-- Modal that pops up when you click on "New Message" -->
+  <div id="messageModal" class="w3-modal" style="z-index:4">
+    <div class="w3-modal-content w3-animate-zoom">
+      <div class="w3-container w3-padding w3-red">
+         <span onclick="document.getElementById('messageModal').style.display='none'"
+         class="w3-button w3-red w3-right w3-xxlarge"><i class="fa fa-remove"></i></span>
+        <h2>Send Mail</h2>
+      </div>
+      <div class="w3-panel">
+        <label>To</label>
+        <input class="w3-input w3-border w3-margin-bottom" type="text">
+        <label>From</label>
+        <input class="w3-input w3-border w3-margin-bottom" type="text">
+        <label>Subject</label>
+        <input class="w3-input w3-border w3-margin-bottom" type="text">
+        <input class="w3-input w3-border w3-margin-bottom" style="height:150px" placeholder="What's on your mind?">
+        <div class="w3-section">
+          <a class="w3-button w3-red" onclick="document.getElementById('messageModal').style.display='none'">Cancel &nbsp;<i class="fa fa-remove"></i></a>
+          <a class="w3-button w3-light-grey w3-right" onclick="document.getElementById('messageModal').style.display='none'">Send &nbsp;<i class="fa fa-paper-plane"></i></a> 
+        </div>    
+      </div>
+    </div>
+  </div>
+  
+  <!-- Overlay effect when opening the side navigation on small screens -->
+  <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="Close Sidemenu" id="myOverlay"></div>
+  
+  <!-- Page content -->
+  <div class="w3-main marginam" style="margin-right:320px;">
+  <i class="fa fa-bars w3-button w3-white w3-hide-large w3-xlarge w3-margin-left w3-margin-top" onclick="w3_open()"></i>
+  <a href="javascript:void(0)" class="w3-hide-large w3-red w3-button w3-right w3-margin-top w3-margin-right" onclick="document.getElementById('messageModal').style.display='block'"><i class="fa fa-pencil"></i></a>
+  
+  <div id="Borge" class="w3-container person"  [ngClass]="{'w3-hide': payam!='Borge'}">
+    <br>
+    <img class="w3-round  w3-animate-top" src="assets/img/3.jpg" style="width:20%;">
+    <h5 class="w3-opacity">موضوع : عکسارو ببین</h5>
+    <h4><i class="fa fa-clock-o"></i> 10 دقیقه قبل</h4>
+    <a class="w3-button w3-light-grey" href="#">پاسخ &nbsp;<i class="w3-margin-left fa fa-mail-reply"></i></a>
+    <a class="w3-button w3-light-grey" href="#">بایگانی &nbsp;<i class="w3-margin-left fa fa-arrow-left"></i></a>
+    <hr>
+    <p>سلام کدم یکی از این عکسا خوشگلتره</p>
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-half">
+        <img src="assets/w3images/lights.jpg" style="width:100%" alt="Northern Lights" class="w3-margin-bottom">
+      </div>
+      <div class="w3-half">
+        <img src="assets/w3images/nature.jpg" style="width:100%" alt="Nature" class="w3-margin-bottom">
+    </div>
+  </div>
+  </div>
+  
+  <div id="Jane" class="w3-container person"  [ngClass]="{'w3-hide': payam!='Jane'}">
+    <br>
+    <img class="w3-round w3-animate-top" src="assets/w3images/avatar5.png" style="width:20%;">
+    <h5 class="w3-opacity">موضوع : چلنج</h5>
+    <h4><i class="fa fa-clock-o"></i> 16 دقیقه قبل</h4>
+    <a class="w3-button w3-light-grey">پاسخ &nbsp;<i class="w3-margin-left fa fa-mail-reply"></i></a>
+    <a class="w3-button w3-light-grey">بایگانی &nbsp;<i class="w3-margin-left fa fa-arrow-right"></i></a>
+    <hr>
+    <p>چلنج دوست داری؟</p>
+  </div>
+  
+  <!-- <div id="John" class="w3-container person"  [ngClass]="{'w3-hide': payam!='John'}">
+    <br>
+    <img class="w3-round w3-animate-top" src="assets/w3images/avatar2.png" style="width:20%;">
+    <h5 class="w3-opacity">Subject: None</h5>
+    <h4><i class="fa fa-clock-o"></i> From John Doe, Sep 23, 2015.</h4>
+    <a class="w3-button w3-light-grey">Reply<i class="w3-margin-left fa fa-mail-reply"></i></a>
+    <a class="w3-button w3-light-grey">Forward<i class="w3-margin-left fa fa-arrow-right"></i></a>
+    <hr>
+    <p>Welcome.</p>
+    <p>That's it!</p>
+  </div> -->
+       
+  </div>

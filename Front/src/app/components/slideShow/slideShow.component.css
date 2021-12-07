@@ -1,0 +1,37 @@
+.slideshow-container {
+    max-width: 66%;
+    position: relative;
+    margin: auto;
+    text-align:center;
+  }
+  
+  .slideshow-container img{
+    display: none;
+  }
+  
+  .slideshow-container img.image-active {
+      display: block;
+      width: 66%;
+  }
+  
+  /* The dots/indicators */
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+  
+  .active, .dot:hover {
+    background-color: #717171;
+  }
+  .margin-right-10 {
+    margin-right: 86px !important;
+  }
+  .margin-left-10 {
+    margin-left: 30px !important;
+  }

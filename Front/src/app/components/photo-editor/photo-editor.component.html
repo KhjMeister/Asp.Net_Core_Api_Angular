@@ -1,0 +1,106 @@
+  <div class="w3-row">
+  <div class="w3-col m2 w3-margin" *ngFor="let photo of photos">
+     <div class="w3-card w3-round w3-white w3-center ">
+      <div class="w3-card-body">
+         <img class="card-img-top" src="{{photo.url}}" alt="" style="width:100%;">
+        
+      </div>
+      <div class="w3-card-footer w3-align-center">
+        <button class="w3-button w3-small w3-margin-bottom w3-margin-top " (click)="setMainPhoto(photo)" [disabled]="photo.isMain" [ngClass]="photo.isMain ? 'w3-green w3-active' : 'w3-theme-d2'"> پروفایل </button>
+        <button class="w3-button w3-small w3-margin-bottom w3-margin-top w3-red" (click)="deletePhoto(photo.id)" [disabled]="photo.isMain"> <i class="fa fa-trash"></i> </button>
+      </div>
+       
+    </div>
+  </div>
+   
+</div>
+<div class="w3-row">
+  <div class="w3-col m9 w3-margin-left" style="margin-bottom: 40px" *ngIf="uploader?.queue?.length">
+
+    <h3>صف بارگذاری</h3>
+    <p>اندازه صف: {{ uploader?.queue?.length }}</p>
+
+    <table class="w3-table ">
+        <thead>
+        <tr >
+            <th class="w3-right" width="30%">نام</th>
+            <th >اندازه</th>
+            
+            <th class="w3-center">عملیات</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of uploader.queue">
+            <td class="w3-right"> <strong>{{ item?.file?.name }}</strong></td>
+            <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} مگابایت</td>
+           
+           
+            <td class="w3-center" nowrap>
+                <button type="button" class="w3-button w3-small w3-green "
+                        (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                    <span class="fa fa-upload"></span> بارگذاری
+                </button>
+                <button type="button" class="w3-button w3-small "
+                        (click)="item.cancel()" [disabled]="!item.isUploading">
+                    <span class="fa fa-ban"></span> لغو
+                </button>
+                <button type="button" class="w3-button w3-small w3-red"
+                        (click)="item.remove()">
+                    <span class="fa fa-trash"></span> حذف
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div>
+      <div class="w3-container">
+        پیشرفت عملیات:
+      <div class="w3-light-grey">
+          <div id="myBar"  role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }" class="w3-container w3-theme w3-padding" style="width: 100%;">%{{uploader.progress}}</div>
+        </div><br>
+        
+        
+      </div>
+       
+        <button type="button" class="w3-button w3-small w3-green "
+                (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+            <span class="fa fa-upload"></span> بارگذاری همه
+        </button>
+        <button type="button" class="w3-button w3-small"
+                (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+            <span class="fa fa-ban"></span> لغو همه
+        </button>
+        <button type="button" class="w3-button w3-red w3-small"
+                (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+            <span class="fa fa-trash"></span> حذف همه
+        </button>
+    </div>
+
+</div>
+  <div class="w3-rest w3-margin-right">
+    
+
+          <h3>انتخاب فایل ها</h3>
+
+          <div ng2FileDrop
+               [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+               (fileOver)="fileOverBase($event)"
+               [uploader]="uploader"
+               class="w3-card my-drop-zone w3-center w3-rest w3-margin-right w3-text-theme">
+               <i class="fa fa-upload w3-text-theme fa-5x"></i>
+              قسمت بارگذاری
+          </div>
+          <input type="file" class="w3-button" ng2FileSelect [uploader]="uploader" multiple id="mimgupload" style="display:none;" /><br/>
+          <label for="mimgupload" class="w3-button w3-text-theme"> انتخاب چند فایل</label>
+
+         
+          <input type="file" class="w3-button" ng2FileSelect [uploader]="uploader" id="imgupload" style="display:none;"/>
+          <label for="imgupload" class="w3-button w3-text-theme">  انتخاب یک فایل</label>
+      </div>
+
+      
+
+  </div>
+
+  <br><br>

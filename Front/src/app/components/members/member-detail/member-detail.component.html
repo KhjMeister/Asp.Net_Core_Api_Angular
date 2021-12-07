@@ -1,0 +1,75 @@
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px"> 
+  
+
+  <div class=" w3-center ">
+    <div class="w3-card w3-container w3-round w3-white w3-center ">
+      
+      <div class="w3-twothird">
+          <div  style="min-height:460px">
+            <div class="">
+              <div class="w3-bar w3-theme">
+                <button class="w3-bar-item w3-button testbtn w3-padding-16 {{selectedRow == 1 ?'w3-theme-dark':''}}" (click)="selectAccordian(1)">پیام ها</button>
+                <button class="w3-bar-item w3-button testbtn w3-padding-16 {{selectedRow == 2 ?'w3-theme-dark':''}}" (click)="selectAccordian(2)">تصاویر</button>
+                <button class="w3-bar-item w3-button testbtn w3-padding-16 {{selectedRow == 3 ?'w3-theme-dark':''}}" (click)="selectAccordian(3)">علاقه مندی ها</button>
+                <button class="w3-bar-item w3-button testbtn w3-padding-16 {{selectedRow == 4 ?'w3-theme-dark':''}}" (click)="selectAccordian(4)">درباره {{user.knownAs}}</button>
+              </div>
+              
+              <div id="messages" class="w3-container city w3-animate-opacity {{selectedRow !== 1 ?'w3-hide':''}}" >
+                <h2>پیام ها</h2>
+                
+                <p>پیا م های شما در این جا نمایش داده می شود</p>
+              </div>
+              
+              <div id="photos" class="w3-container city w3-animate-opacity {{selectedRow !== 2 ?'w3-hide':''}}" >
+                
+                <div class="w3-content w3-display-container w3-animate-top " >
+                  <div>
+                    <app-slideShow [user]="user"></app-slideShow>
+                    <!-- <img *ngFor="let item of user.photos" class="mySlides margin-right-50 margin-left-50" src="{{item.url}}" style="width:50%;height: 50%;"> -->
+                  </div>
+                  <!-- <button class="w3-button w3-black w3-display-right" (click)="plusDivs(1)">&#10094;</button>
+                  <button class="w3-button w3-black w3-display-left" (click)="plusDivs(-1)">&#10095;</button> -->
+                </div>
+
+
+              </div>
+              
+              <div id="Interests" class="w3-container city w3-animate-opacity {{selectedRow !== 3 ?'w3-hide':''}}">
+                <h2>علاقه مندی ها</h2>
+                
+                <p>{{user.interests}}</p>
+              </div>
+              <div id="About" class="w3-container city w3-animate-opacity {{selectedRow !== 4 ?'w3-hide':''}}">
+                <h2>درباره</h2>
+                <p>{{user.introduction}}</p>
+                <p>دنبال فردی با مشخصات زیر می باشد:</p>
+                <p>{{user.lookingFor}}</p>
+              </div>
+              </div>
+          </div>
+      </div>
+      <div class="w3-third">
+          <div class="w3-card w3-container" style="min-height:460px;max-width:300px">
+            <h3>{{user.knownAs}}</h3><br>
+            <img class="w3-round  w3-margin-bottom w3-text-theme w3-animate-top " alt="{{user.knownAs}}" src="{{user.photoUrl||'assets/w3images/avatar.png'}}" style="width:65%;">
+            
+            <p>محل زندگی: {{user.city}},{{user?.country}}</p>
+            <p>سن : {{user.age}}</p>
+            <p>آخرین فعالیت : {{user.lastActive|timeago}}</p>
+            <p>شروع فعالیت : {{user.created|date:'mediumDate'}}</p>
+            <div class="w3-section">
+              <a class="w3-button w3-text-teal" >ارسال پیام &nbsp;<i class="fa fa-envelope"></i></a>
+              <a class="w3-button w3-light-grey w3-right" >پسندیدن &nbsp;<i class="fa fa-thumbs-up"></i></a> 
+            </div>
+          </div>
+      </div>
+
+ 
+ 
+      
+    </div>
+  </div>
+
+</div>
+
+

@@ -1,0 +1,102 @@
+
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+
+    <div class="w3-row">
+  
+      
+      
+      <!-- Middle Column -->
+      <div class="w3-col m9">
+        
+        <div class="w3-container w3-card w3-white w3-round w3-margin-right w3-margin-left w3-margin-bottom"><br>
+            <div class="w3-bar ">
+                <button class="w3-bar-item  w3-button testbtn w3-padding-16 {{selectedRow == 2 ?'w3-theme-dark':''}}" (click)="selectAccordian(2)">ویرایش تصاویر</button>
+                <button class="w3-bar-item  w3-button testbtn w3-padding-16 {{selectedRow == 1 ?'w3-theme-dark':''}}" (click)="selectAccordian(1)">ویرایش پروفایل</button>
+                
+            </div>
+            <div id="messages" class="w3-container city w3-animate-opacity {{selectedRow !== 1 ?'w3-hide':''}}" >
+                <div class="w3-content w3-display-container w3-animate-top " >
+                    <div>
+                        <div id="myalert" *ngIf="editForm.dirty" class="w3-panel w3-animate-top w3-card w3-blue-grey w3-right-align">
+                            <span onclick="this.parentElement.style.display='none'" class="w3-button w3-blue-grey w3-display-topleft" style="margin-top: 6px; margin-left: 6px;">x</span>
+                            <p>شما تغییرات را ذخیره نکرده اید لطفا برای ادامه دکمه ثبت تغییرات را بفشارید !</p>
+                          </div>
+                    </div>
+                
+                <form id="editForm" class="w3-container " #editForm="ngForm" (ngSubmit)="updateUser()">
+                   
+                    <div class="w3-section">      
+                        <label>درباره من</label>
+                      <textarea class="w3-input w3-border" [(ngModel)]="user.introduction" rows="4" name="introduction" required=""></textarea>
+                    </div>
+                    <div class="w3-section">      
+                        <label>موراد جستجو</label>
+                        <textarea class="w3-input w3-border" [(ngModel)]="user.lookingFor" rows="5"  name="lookingFor" required=""></textarea>
+                    </div>
+                    <div class="w3-section">      
+                        <label>علاقه مندی ها</label>
+                        <textarea class="w3-input w3-border" [(ngModel)]="user.interests" rows="2"  name="interests"  required=""></textarea>
+                    </div>
+                    <div class="w3-half">
+                        <div class="w3-section w3-margin">      
+                            <label>شهر</label>
+                            <input class="w3-input w3-border " [(ngModel)]="user.city"  name="city" type="text" required="">
+                        </div>
+                        
+                    </div>
+                    <div class="w3-half">
+                        <div class="w3-section w3-margin">      
+                            <label>کشور</label>
+                            <input class="w3-input w3-border " [(ngModel)]="user.country" name="country" type="text" required="">
+                        </div>
+                    </div>
+                  </form>
+            </div>
+              </div>
+              
+              <div id="photos" class="w3-container city w3-animate-opacity {{selectedRow !== 2 ?'w3-hide':''}}" >
+                
+                <div class="w3-content w3-display-container w3-animate-top " >
+                    <h2>ویرایش تصاویر</h2>
+
+                      <app-photo-editor [photos]="user.photos" (getMemberPhotoChange)="updateMainPhoto($event)"></app-photo-editor>
+
+                </div>
+
+
+              </div>
+
+           </div>
+        
+     
+  
+        
+        
+      <!-- End Middle Column -->
+      </div>
+      
+     
+      <!-- right Column -->
+      <div class="w3-col m3">
+        <!-- Profile -->
+        <div class="w3-card w3-round w3-white">
+          <div class="w3-container">
+           <h4 class="w3-center">پروفایل من</h4>
+           <p class="w3-center"><img src="{{photoUrl||'assets/w3images/avatar.png'}}" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+           <hr>
+           <p><i class="fa fa-user fa-fw w3-margin-left w3-text-theme w3-margin-right"></i> {{user.knownAs}}</p>
+           <p><i class="fa fa-home fa-fw w3-margin-left w3-text-theme w3-margin-right"></i> {{user.city}},{{user?.country}}</p>
+           <p><i class="fa fa-birthday-cake fa-fw w3-margin-left w3-text-theme w3-margin-right"></i> {{user.age}} ساله</p>
+           <button type="submit" onclick="document.getElementById('myalert').style.display='none'" form="editForm" [disabled]="!editForm.dirty"  class="w3-button w3-margin-bottom w3-green w3-left "><i class="fa fa-pencil "></i> ثبت تغییرات</button>
+          </div>
+        </div>
+        <br>
+   
+        <br>
+      </div>
+      
+ 
+    </div>
+    
+  
+  </div>

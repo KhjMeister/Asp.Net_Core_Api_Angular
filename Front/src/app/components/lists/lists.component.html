@@ -1,0 +1,84 @@
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px"> 
+  
+
+    <div class=" w3-center ">
+      <div class="w3-card w3-container w3-round w3-white w3-center ">
+        
+        <div class="w3-col">
+            <div  style="min-height:460px">
+              <div class="">
+                <div class="w3-bar w3-theme">
+                  <button class="w3-bar-item w3-button testbtn w3-padding-16 {{selectedRow == 1 ?'w3-theme-dark':''}}" (click)="selectAccordian(1)">کاربرانی که شما را پسندیده اند</button>
+                  <button class="w3-bar-item w3-button testbtn w3-padding-16 {{selectedRow == 2 ?'w3-theme-dark':''}}" (click)="selectAccordian(2)">کاربرانی را که شما پسندیده اید</button>
+                  
+                </div>
+                
+                <div id="messages" class="w3-container city w3-animate-opacity {{selectedRow !== 2 ?'w3-hide':''}}" >
+                    <div class="w3-content w3-display-container w3-animate-top w3-right w3-row" >
+                        <h4> تعداد نفراتی که شما لایک کرده اید:  {{ pagination.totalItems}} </h4>
+                           
+                            
+                            <div class="w3-col m2 w3-right" *ngFor="let usr of users">
+
+                                <app-member-card [user]="usr" class="w3-margin-right"></app-member-card>
+                    
+                                <br>
+                            </div>
+                            <div class="w3-row">
+                                <app-mypagination 
+                                [totalRecords]="pagination.totalItems"
+                                [(ngModel)]="pagination.currentPage"
+                                [recordsPerPage]="pagination.itemsPerPage" 
+                                (onPageChange)="displayActivePage($event)"
+                                ></app-mypagination>
+                            </div>
+                        
+                        
+                    </div>
+                </div>
+                
+                <div id="photos" class="w3-container city w3-animate-opacity {{selectedRow !== 1 ?'w3-hide':''}}" >
+                    
+                    <div class="w3-content w3-display-container w3-animate-top w3-right w3-row" >
+                        <h4>  تعداد نفراتی که شما را لایک کرده اند: {{ pagination.totalItems}} </h4>
+                        
+                        
+                     
+                        <div class="w3-col m2 w3-right" *ngFor="let usr of users">
+
+                            <app-member-card [user]="usr" class="w3-margin-right"></app-member-card>
+                
+                            <br>
+                        </div>
+                        <div class="w3-row">
+                            <app-mypagination 
+                            [totalRecords]="pagination.totalItems"
+                            [(ngModel)]="pagination.currentPage"
+                            [recordsPerPage]="pagination.itemsPerPage" 
+                            (onPageChange)="displayActivePage($event)"
+                            ></app-mypagination>
+                        </div>
+                       
+                   
+                    </div>
+  
+  
+                </div>
+                
+              
+              
+                </div>
+            </div>
+        </div>
+       
+  
+   
+   
+        
+      </div>
+    </div>
+  
+  </div>
+  
+  
+  

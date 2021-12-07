@@ -1,0 +1,201 @@
+
+<div class="w3-top ">
+    <div class="w3-bar w3-theme-d2 w3-right-align w3-large">
+     <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" (click)="openNav()"><i class="fa fa-bars"></i></a>
+     <a  [routerLink]="['/']" routerLinkActive="w3-text-teal" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"><i class="fa fa-home w3-margin-right"></i></a>
+     
+     <a *ngIf="loggedIn()" [routerLink]="['/lists']" routerLinkActive="w3-text-teal"  class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="News"><i class="fa fa-bars"></i></a>
+     <a *ngIf="loggedIn()" [routerLink]="['/members']" routerLinkActive="w3-text-teal"  class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-users"></i></a>
+     <a *ngIf="loggedIn()" [routerLink]="['/messages']" routerLinkActive="w3-text-teal"  class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
+     
+     
+     
+     <button onclick="document.getElementById('id01').style.display='block'" *ngIf="!loggedIn()" class="w3-round w3-left w3-margin-left w3-button w3-green w3-large btn-m-t">ورود</button>
+     <button onclick="document.getElementById('id02').style.display='block'" *ngIf="!loggedIn()" class="w3-round w3-left w3-margin-left w3-button w3-blue w3-large btn-m-t">ثبت نام</button>
+    
+
+  
+
+    <div *ngIf="loggedIn()" class="w3-dropdown-hover w3-hide-small w3-left " dir="ltr">
+      <button class="w3-button w3-padding-large " title="Notifications">
+        <img src="{{photoUrl||'assets/w3images/avatar.png'}}" class="w3-circle" style="height:23px;width:23px" alt="{{ auth.decodedToken?.unique_name }}">
+        
+      </button>     
+      <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-theme-d2 " style="width:50px">
+        <a  class="w3-bar-item w3-button w3-left-align ">{{ auth.decodedToken?.unique_name }}&nbsp;خوش آمدی  </a>
+        <a [routerLink]="['/profile']" routerLinkActive="w3-text-teal" class="w3-bar-item w3-button w3-left-align "><i class="fa fa-user"></i> پروفایل </a>
+        
+        <a (click)="logout()" class="w3-bar-item w3-button w3-left-align"><i class="fa fa-sign-out"></i> خروج</a>
+      </div>
+    </div>
+  
+    </div>
+   </div>
+   
+  
+   <div id="navDemo" class="{{ navInMobile == true ? 'w3-show':'' }}  w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+     <a href="#" class="w3-right-align w3-bar-item w3-button w3-padding-large">Link 1</a>
+     <a [routerLink]="['/']" routerLinkActive="w3-text-teal" class="w3-right-align w3-bar-item w3-button w3-padding-large"><i class="fa fa-home w3-margin-right"></i></a>
+    
+     
+     <div *ngIf="loggedIn()" class="w3-dropdown-hover w3-right-align w3-left " dir="ltr">
+      <button class="w3-right-align w3-bar-item w3-button w3-padding-large " title="Notifications">
+        <img src="{{photoUrl||'assets/w3images/avatar.png'}}" class="w3-circle w3-margin-right" style="height:23px;width:23px" alt="Avatar">
+        
+      </button>     
+      <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-theme-d2 " style="width:50px">
+        <a [routerLink]="['/profile']" routerLinkActive="w3-text-teal" class="w3-bar-item w3-button w3-left-align "><i class="fa fa-user"></i>  پروفایل</a>
+        
+        <a (click)="logout()" class="w3-bar-item w3-button w3-left-align"><i class="fa fa-sign-out"></i> خروج</a>
+      </div>
+    </div>
+   </div>
+
+   <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:585px">
+  
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">&times;</span>
+        <img src="assets/w3images/avatar2.png" alt="Avatar" style="width:25%" class="w3-circle w3-margin-top">
+      </div>
+
+      <form class="w3-container" #loginForm="ngForm" (ngSubmit)="login()" >
+        <div class="w3-section">
+          <label><b>نام کاربری</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" required placeholder="نام کاربری را وارد کنید." [(ngModel)]="model.username" name="username" required>
+          <label><b>Password</b></label>
+          <input class="w3-input w3-border" [(ngModel)]="model.password" name="password" type="password" required placeholder="رمز را وارد کنید" required>
+          <button class="w3-button w3-block w3-green w3-section w3-padding" [disabled]="!loginForm.valid" onclick="document.getElementById('id01').style.display='none'" type="submit">ورود</button>
+          <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> مرا به خاطر بسپار
+        </div>
+      </form>
+       
+
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">لغو</button>
+        <span class="w3-right w3-padding w3-hide-small"> <a href="#"> پسوردم را فراموش کردم</a></span>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="id02" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:585px">
+  
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-xlarge w3-transparent w3-display-topright" title="Close Modal">&times;</span>
+        <span  class=" w3-center w3-xlarge w3-border-blue w3-bottombar">ثبت نام</span>
+        <br>
+      </div>
+
+      <form class="w3-container" [formGroup]="registerForm" (ngSubmit)="register()">
+        
+        <div class="w3-section">
+          
+          
+          <label><b>نام کاربری</b></label>
+          <input class="w3-input w3-border" type="text" 
+          placeholder="نام کاربری را وارد کنید" 
+          formControlName="username" 
+          [ngClass]="{ 'w3-border-red':  f.username.errors && f.username.touched }"
+          >
+          <div *ngIf="f.username.touched && f.username.invalid" class="w3-text-red">
+            <div *ngIf="f.username.errors?.required"> لطفا یک نام کاربری انتخاب کنید </div>
+          </div>
+          <label><b>نام دوم </b></label>
+          <input class="w3-input w3-border" type="text" 
+          placeholder=" این نام برای نمایش به دیگر کاربران به کار می رود" 
+          formControlName="knownAs" 
+          [ngClass]="{ 'w3-border-red':  f.knownAs.errors && f.knownAs.touched }"
+          >
+          <div *ngIf="f.knownAs.touched && f.knownAs.invalid" class="w3-text-red">
+            <div *ngIf="f.knownAs.errors?.required"> لطفا یک نام دوم انتخاب  کنید </div>
+          </div>
+          <label><b>رمز</b></label>
+          <input class="w3-input w3-border"
+           type="password" placeholder="پسورد را وارد کنید"
+            formControlName="password" 
+            [ngClass]="{ 'w3-border-red':  f.password.errors && f.password.touched }"
+            >
+            <div *ngIf="f.password.touched && f.password.invalid" class="w3-text-red">
+              <div *ngIf="f.password.errors?.required"> لطفا یک  رمز انتخاب کنید </div>
+              <div *ngIf="f.password.errors?.minlength||f.password.errors?.maxlength">پسورد باید بین 4 تا 8  حرف باشد</div>
+            </div>
+          
+          <label><b>تایید رمز کاربری</b></label>
+          <input class="w3-input w3-border"
+           type="password" placeholder="پسورد را دوباره وارد کنید"
+            formControlName="confirmPassword" 
+            [ngClass]="{ 'w3-border-red':  f.confirmPassword.errors && f.confirmPassword.touched }"
+            >
+            <div *ngIf="f.confirmPassword.touched && f.confirmPassword.invalid" class="w3-text-red w3-margin-bottom">
+              <div *ngIf="f.confirmPassword.errors?.required">لطفا رمز خود را دوباره تکرار کنید </div>
+              <div *ngIf="f.confirmPassword.errors?.passwordMatchValidator">   پسورد ها مشابه نیستند    </div>
+              
+            </div>
+            <div class="">
+              <div class="w3-half w3-margin-bottom">
+                  <input id="female" class="w3-radio" type="radio" formControlName="gender" value="female">
+                  <label for="female">&nbsp; زن</label>
+              </div>
+              <div class="w3-half w3-margin-bottom">
+                <input id="male" class="w3-radio" type="radio" formControlName="gender" value="male" checked="">
+                <label for="male">&nbsp; مرد</label>
+              </div>
+            </div>
+
+            <label><b>تاریخ تولد  </b></label>
+            <!-- <input class="w3-input w3-border" type="date" 
+            placeholder=" تاریخ تولد خود را وارد کنید!" 
+            formControlName="dateOfBirth" 
+            [ngClass]="{ 'w3-border-red':  f.dateOfBirth.errors && f.dateOfBirth.touched }"
+            > -->
+            <input type="text" class="w3-input w3-border" [ngClass]="{ 'w3-border-red':  f.dateOfBirth.errors && f.dateOfBirth.touched }" formControlName="dateOfBirth"  #datepickerInput />
+            <ng-persian-datepicker
+              [input]="datepickerInput"
+              [uiTheme]="'gray'"
+              [dateInitValue]="false"
+              [dateFormat]="'jYYYY-jMM-jDD'"
+              ></ng-persian-datepicker>
+            <div *ngIf="f.dateOfBirth.touched && f.dateOfBirth.invalid" class="w3-text-red">
+              <div *ngIf="f.dateOfBirth.errors?.required"> لطفا تاریخ تولدتان را وارد کنید  </div>
+            </div>
+            <div class="">
+              <div class="w3-half w3-margin-bottom ">
+                <label><b>کشور </b></label>
+                <input class="w3-input w3-border w3-margin-left" type="text" 
+                placeholder=" کشور محل زندگی  " 
+                formControlName="country" 
+                [ngClass]="{ 'w3-border-red':  f.country.errors && f.country.touched }"
+                >
+                <div *ngIf="f.country.touched && f.country.invalid" class="w3-text-red">
+                  <div *ngIf="f.country.errors?.required"> لطفا نام کشورتان را انتخاب  کنید </div>
+                </div>
+              </div>
+              <div class="w3-rest w3-margin-bottom">
+                <label><b>شهر </b></label>
+                <input class="w3-input w3-border" type="text" 
+                placeholder=" شهر محل زندگی  " 
+                formControlName="city" 
+                [ngClass]="{ 'w3-border-red':  f.city.errors && f.city.touched }"
+                >
+                <div *ngIf="f.city.touched && f.city.invalid" class="w3-text-red">
+                  <div *ngIf="f.city.errors?.required"> لطفا نام شهر محل زندگیتان را انتخاب  کنید </div>
+                </div>
+              </div>
+            </div>
+          
+          <button class="kk w3-button w3-margin-top w3-block w3-blue w3-section w3-padding" [disabled]="!registerForm.valid" onclick="document.getElementById('id02').style.display='none'" type="submit">ثبت نام</button>
+          
+        </div>
+      </form>
+
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+      
+        <button onclick="document.getElementById('id02').style.display='none'" type="button" class="w3-button w3-red">لغو</button>
+        
+      </div>
+
+    </div>
+  </div>
+  

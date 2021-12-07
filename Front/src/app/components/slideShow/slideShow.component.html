@@ -1,0 +1,14 @@
+<div *ngIf="images">
+  <div class="mySlides slideshow-container">
+      <img class="margin-right-10" *ngFor="let image of user.photos; let i=index" 
+          [src]="image.url" 
+          [ngClass]="{'image-active': selectedindex == i}">  
+
+      <div style="text-align:center; display:inline-block;"  *ngFor="let dot of user.photos; let i=index">
+          <span class="dot" 
+              (click)="selectImage(i)"
+              [ngClass]="{'active': selectedindex == i}">
+          </span>
+      </div>
+  </div>
+</div>
